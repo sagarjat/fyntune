@@ -89,74 +89,56 @@
             <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i>
               Login</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-user-plus mr-1"></i>
               Register</a>
-          </li>
+          </li> -->
         </ul>
 
         <!-- Tab panels -->
         <div class="tab-content">
-          <!--Panel 7-->
-          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+            <!--Panel 7-->
+            <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                <!--Body-->
+                <div class="modal-body mb-1">
+                    <div class="md-form form-sm  ">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input type="email" id="email" name="email" class="form-control form-control-sm validate">
+                        <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
+                    </div>
 
-            <!--Body-->
-            <div class="modal-body mb-1">
-              <div class="md-form form-sm  ">
-                <i class="fas fa-envelope prefix"></i>
-                <input type="email" id="modalLRInput10" class="form-control form-control-sm validate">
-                <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
-              </div>
-
-              <div class="md-form form-sm mb-4">
-                <i class="fas fa-lock prefix"></i>
-                <input type="password" id="modalLRInput11" class="form-control form-control-sm validate">
-                <label data-error="wrong" data-success="right" for="modalLRInput11">Your password</label>
-              </div>
-              <div class="text-center mt-2">
-                <button class="btn btn-info">Log in <i class="fas fa-sign-in ml-1"></i></button>
-              </div>
+                    <div class="md-form form-sm mb-4">
+                        <i class="fas fa-lock prefix"></i>
+                        <input type="password" id="password" name="password" class="form-control form-control-sm validate">
+                        <label data-error="wrong" data-success="right" for="modalLRInput11">Your password</label>
+                    </div>
+                    <div class="text-center mt-2">
+                        <button class="btn btn-info" id="btnsub">Log in <i class="fas fa-sign-in ml-1"></i></button>
+                    </div>
+                </div>
             </div>
-          </div>
-          <!--/.Panel 7-->
-
-          <!--Panel 8-->
-          <div class="tab-pane fade" id="panel8" role="tabpanel">
-
-            <!--Body-->
-            <div class="modal-body">
-              <div class="md-form form-sm  ">
-                <i class="fas fa-envelope prefix"></i>
-                <input type="email" id="modalLRInput12" class="form-control form-control-sm validate">
-                <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
-              </div>
-
-              <div class="md-form form-sm  ">
-                <i class="fas fa-lock prefix"></i>
-                <input type="password" id="modalLRInput13" class="form-control form-control-sm validate">
-                <label data-error="wrong" data-success="right" for="modalLRInput13">Your password</label>
-              </div>
-
-              <div class="md-form form-sm mb-4">
-                <i class="fas fa-lock prefix"></i>
-                <input type="password" id="modalLRInput14" class="form-control form-control-sm validate">
-                <label data-error="wrong" data-success="right" for="modalLRInput14">Repeat password</label>
-              </div>
-
-              <div class="text-center form-sm mt-2">
-                <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
-              </div>
-
-            </div>
-          <!--/.Panel 8-->
+            <!--/.Panel 7--> 
         </div>
-
-      </div>
     </div>
     <!--/.Content-->
   </div>
 </div>
 <!--Modal: Login / Register Form-->
 
+<script>
+$("#btnsub").on('click',function(){
+    var email = $('#email').val();
+    var password = $('#password').val();
+    $.ajax({
+        url:  '/login',
+        type: 'POST',
+        data: {email:email,password:password,_token:"{{ csrf_token() }}"},
+        success: function (response) {
+            response = JSON.parse(response);
+        }
+    });
+});
+
+</script>
 
 @stop

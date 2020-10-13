@@ -30,6 +30,7 @@
 //     return view('welcome');
 // });
 Route::get('/', 'McqController@index');
+Route::post('/login', 'McqController@login');
 // Route::get('/page2', function () {
 //     return view('page2');
 // });
